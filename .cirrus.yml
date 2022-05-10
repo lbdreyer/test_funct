@@ -43,4 +43,4 @@ linux_task:
     - conda list envs
     - source activate py38
     - pytest --cov-report=xml --cov
-    - ${COVERAGE}
+    - ${COVERAGE} -h
