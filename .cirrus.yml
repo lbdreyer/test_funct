@@ -1,0 +1,33 @@
+# Reference:
+#   - https://cirrus-ci.org/guide/writing-tasks/
+#   - https://cirrus-ci.org/guide/linux/
+#   - https://hub.docker.com/_/gcc/
+#   - https://hub.docker.com/_/python/
+
+#
+# Global defaults.
+#
+container:
+  image: python:latest
+  cpu: 2
+  memory: 4G
+
+#
+# Testing (Linux)
+#
+linux_task:
+  auto_cancellation: true
+  matrix:
+    env:
+      PY_VER: "3.8"
+      COVERAGE: "codecov"
+  name: "${CIRRUS_OS}: py${PY_VER}"
+  container:
+    image: gcc:latest
+  env:
+    PATH: ${HOME}/mambaforge/bin:${PATH}
+  test_script:
+    - conda create --name py38 --file conda-linux-64.lock
+    - conda activate py38 >/dev/null 2>&1
+    - pytest --cov-report=xml --cov
+    - ${COVERAGE}
