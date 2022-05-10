@@ -8,7 +8,7 @@
 # Global defaults.
 #
 container:
-  image: python:latest
+  image: gcc:latest
   cpu: 2
   memory: 4G
 
@@ -17,6 +17,7 @@ container:
 #
 linux_task:
   auto_cancellation: true
+  
   matrix:
     env:
       PY_VER: "3.8"
@@ -25,7 +26,18 @@ linux_task:
   container:
     image: gcc:latest
   env:
-    PATH: ${HOME}/mambaforge/bin:${PATH}
+    PATH: ${HOME}/miniconda/bin:${PATH}
+  conda_cache:
+    folder: ${HOME}/miniconda
+    fingerprint_script:
+      - wget --quiet https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+      - echo "${CIRRUS_OS} $(sha256sum miniconda.sh)"
+    populate_script:
+      - bash miniconda.sh -b -p ${HOME}/miniconda
+      - conda config --set always_yes yes --set changeps1 no
+      - conda config --set show_channel_urls True
+      - conda config --add channels conda-forge
+      - conda update --quiet --name base conda
   test_script:
     - conda create --name py38 --file conda-linux-64.lock
     - conda activate py38 >/dev/null 2>&1
