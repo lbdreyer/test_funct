@@ -43,6 +43,6 @@ linux_task:
     - conda list envs
     - source activate py38
     - pytest --cov-report=xml --cov
-    - echo ${CODECOV_TOKEN}
+    - if [ -z $CODECOV_TOKEN ]; then  echo "available"; fi
     - ${COVERAGE} -h
     - ${COVERAGE}
