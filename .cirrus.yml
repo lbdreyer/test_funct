@@ -44,5 +44,6 @@ linux_task:
     - source activate py38
     - pytest --cov-report=xml --cov
     - if [ -z $CODECOV_TOKEN ]; then  echo "available"; fi
+    - bash <(curl -Ls https://coverage.codacy.com/get.sh)
     - ${COVERAGE} -h
-    - ${COVERAGE}
+    - echo ${COVERAGE}
