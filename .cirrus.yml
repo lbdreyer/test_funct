@@ -44,3 +44,4 @@ linux_task:
     - source activate py38
     - pytest --cov-report=xml --cov
     - ${COVERAGE} -h
+    - ${COVERAGE}
