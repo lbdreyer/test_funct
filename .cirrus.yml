@@ -48,6 +48,6 @@ linux_task:
     - export CODACY_PROJECT_TOKEN=6490aad310534bce894f1e6d76c08b37
     - printenv
     - ls *
-    - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r report.xml
+    - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage.xml
     - ${COVERAGE} -h
     - echo ${COVERAGE}
