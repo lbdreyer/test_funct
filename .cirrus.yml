@@ -45,6 +45,7 @@ linux_task:
     - pytest --cov-report=xml --cov
     - if [ -z $CODECOV_TOKEN ]; then  echo "available"; fi
     - if [ -z $CODACY_PROJECT_TOKEN ]; then  echo "available"; fi
+    - printenv
     - bash <(curl -Ls https://coverage.codacy.com/get.sh)
     - ${COVERAGE} -h
     - echo ${COVERAGE}
