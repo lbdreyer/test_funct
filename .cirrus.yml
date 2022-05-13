@@ -47,6 +47,6 @@ linux_task:
     - if [ -z $CODACY_PROJECT_TOKEN ]; then  echo "available"; fi
     - export CODACY_PROJECT_TOKEN=6490aad310534bce894f1e6d76c08b37
     - printenv
-    - bash <(curl -Ls https://coverage.codacy.com/get.sh)
+    - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r report.xml
     - ${COVERAGE} -h
     - echo ${COVERAGE}
